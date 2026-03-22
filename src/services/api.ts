@@ -4,7 +4,7 @@ import axios from 'axios';
 const api = axios.create({
   // ใส่ URL ของ Backend ที่ได้มาตรงนี้
   // ถ้า Backend ของคุณมี prefix เช่น /api ก็เติมต่อท้ายได้เลย เช่น http://127.0.0.1:8000/api
-  baseURL: '', 
+  baseURL: 'https://school-lms-backend-fjrx.onrender.com', 
   headers: {
     'Content-Type': 'application/json',
   },
