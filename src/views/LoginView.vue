@@ -69,7 +69,7 @@ const handleResetPassword = async () => {
           <div>
             <label class="block text-[9px] font-black text-slate-400 uppercase tracking-widest mb-2 ml-1">อีเมลผู้ใช้งาน</label>
             <div class="relative">
-              <input v-model="email" type="email" required placeholder="admin@school.com" :class="[authStore.loginFailed ? 'border-red-400 bg-red-50 ring-2 ring-red-100' : 'border-slate-100 bg-slate-50 focus:bg-white', 'w-full pl-11 pr-4 py-3.5 border-2 rounded-2xl transition-all font-bold text-sm text-slate-700 outline-none']" :style="!authStore.loginFailed ? { ':focus': `border-color: ${settings.primary_color}` } : {}" />
+              <input v-model="email" type="email" required placeholder="admin@school.com" :class="[authStore.loginFailed ? 'border-red-400 bg-red-50 ring-2 ring-red-100' : 'border-slate-100 bg-slate-50 focus:bg-white', 'w-full pl-11 pr-4 py-3.5 border-2 rounded-2xl transition-all font-bold text-sm text-slate-700 outline-none']" />
               <span class="absolute left-4 top-4 text-slate-400"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.206" /></svg></span>
             </div>
           </div>
@@ -77,7 +77,7 @@ const handleResetPassword = async () => {
           <div>
             <label class="block text-[9px] font-black text-slate-400 uppercase tracking-widest mb-2 ml-1">รหัสผ่าน</label>
             <div class="relative">
-              <input v-model="password" :type="showPassword ? 'text' : 'password'" required placeholder="••••••••" :class="[authStore.loginFailed ? 'border-red-400 bg-red-50 ring-2 ring-red-100' : 'border-slate-100 bg-slate-50 focus:bg-white', 'w-full pl-11 pr-11 py-3.5 border-2 rounded-2xl transition-all font-bold text-sm text-slate-700 outline-none tracking-widest']" :style="!authStore.loginFailed ? { ':focus': `border-color: ${settings.primary_color}` } : {}" />
+              <input v-model="password" :type="showPassword ? 'text' : 'password'" required placeholder="••••••••" :class="[authStore.loginFailed ? 'border-red-400 bg-red-50 ring-2 ring-red-100' : 'border-slate-100 bg-slate-50 focus:bg-white', 'w-full pl-11 pr-11 py-3.5 border-2 rounded-2xl transition-all font-bold text-sm text-slate-700 outline-none tracking-widest']"  />
               <span class="absolute left-4 top-4 text-slate-400"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg></span>
               <button type="button" @click="showPassword = !showPassword" class="absolute right-4 top-4 text-slate-400 hover:text-slate-600 transition-colors">
                 <svg v-if="!showPassword" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
@@ -123,20 +123,20 @@ const handleResetPassword = async () => {
           <form @submit.prevent="handleResetPassword" class="p-6 space-y-4">
             <div>
               <label class="block text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1.5">อีเมลผู้ใช้งาน</label>
-              <input v-model="resetForm.email" required type="email" placeholder="email@school.com" class="w-full px-4 py-2.5 bg-slate-50 border-2 border-transparent rounded-xl focus:bg-white font-semibold text-xs outline-none transition-colors" :style="{ ':focus': `border-color: ${settings.primary_color}` }">
+              <input v-model="resetForm.email" required type="email" placeholder="email@school.com" class="w-full px-4 py-2.5 bg-slate-50 border-2 border-transparent rounded-xl focus:bg-white font-semibold text-xs outline-none transition-colors" >
             </div>
             <div>
               <label class="block text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1.5">รหัสผ่านเดิม</label>
-              <input v-model="resetForm.old_password" required type="password" placeholder="••••••••" class="w-full px-4 py-2.5 bg-slate-50 border-2 border-transparent rounded-xl focus:bg-white font-semibold text-xs outline-none transition-colors tracking-widest" :style="{ ':focus': `border-color: ${settings.primary_color}` }">
+              <input v-model="resetForm.old_password" required type="password" placeholder="••••••••" class="w-full px-4 py-2.5 bg-slate-50 border-2 border-transparent rounded-xl focus:bg-white font-semibold text-xs outline-none transition-colors tracking-widest" >
             </div>
             <div class="grid grid-cols-2 gap-3">
               <div>
                 <label class="block text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1.5">รหัสผ่านใหม่</label>
-                <input v-model="resetForm.new_password" required type="password" :class="[resetError ? 'border-red-400 ring-2 ring-red-50' : 'border-transparent', 'w-full px-4 py-2.5 bg-slate-50 border-2 rounded-xl focus:bg-white font-semibold text-xs outline-none transition-colors tracking-widest']" :style="!resetError ? { ':focus': `border-color: ${settings.primary_color}` } : {}">
+                <input v-model="resetForm.new_password" required type="password" :class="[resetError ? 'border-red-400 ring-2 ring-red-50' : 'border-transparent', 'w-full px-4 py-2.5 bg-slate-50 border-2 rounded-xl focus:bg-white font-semibold text-xs outline-none transition-colors tracking-widest']">
               </div>
               <div>
                 <label class="block text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1.5">ยืนยันรหัสใหม่</label>
-                <input v-model="resetForm.confirm_new_password" required type="password" :class="[resetError ? 'border-red-400 ring-2 ring-red-50' : 'border-transparent', 'w-full px-4 py-2.5 bg-slate-50 border-2 rounded-xl focus:bg-white font-semibold text-xs outline-none transition-colors tracking-widest']" :style="!resetError ? { ':focus': `border-color: ${settings.primary_color}` } : {}">
+                <input v-model="resetForm.confirm_new_password" required type="password" :class="[resetError ? 'border-red-400 ring-2 ring-red-50' : 'border-transparent', 'w-full px-4 py-2.5 bg-slate-50 border-2 rounded-xl focus:bg-white font-semibold text-xs outline-none transition-colors tracking-widest']">
               </div>
             </div>
 

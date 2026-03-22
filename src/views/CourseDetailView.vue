@@ -777,7 +777,7 @@ const formatTimeOnly = (ds: string) => new Date(ds).toLocaleTimeString('th-TH', 
                 </div>
 
                 <div v-if="activeLessonQuizzes.length > 0" class="mt-4 pt-4 border-t border-slate-100">
-                  <h4 class="text-xs font-bold text-slate-800 mb-3 flex items-center gap-1.5"><span v-html="menus[2].icon" style="color: var(--theme-color)"></span> ควิซทดสอบความเข้าใจ</h4>
+                  <h4 class="text-xs font-bold text-slate-800 mb-3 flex items-center gap-1.5"><span v-html="menus[2]?.icon" style="color: var(--theme-color)"></span> ควิซทดสอบความเข้าใจ</h4>
                   <div class="flex flex-col gap-2">
                      <div v-for="q in activeLessonQuizzes" :key="q.id" class="bg-slate-50 p-3 rounded-lg border border-slate-200 flex justify-between items-center">
                         <div>
@@ -839,7 +839,7 @@ const formatTimeOnly = (ds: string) => new Date(ds).toLocaleTimeString('th-TH', 
                                   <div v-if="s.submission">
                                       <p v-if="s.submission.student_comment" class="bg-slate-50 p-2 rounded border border-slate-100 text-[10px] text-slate-600 mb-2 italic">"{{ s.submission.student_comment }}"</p>
                                       <div v-if="s.submission.file_urls" class="flex flex-wrap gap-1.5">
-                                          <a v-for="(url, i) in parseJsonArray(s.submission.file_urls)" :key="i" :href="getBaseUrl() + url" target="_blank" class="inline-block bg-emerald-50 text-emerald-600 border border-emerald-100 px-2 py-1 rounded text-[9px] font-bold hover:bg-emerald-100">ไฟล์ {{ i+1 }}</a>
+                                          <a v-for="(url, i) in parseJsonArray(s.submission.file_urls)" :key="i" :href="getBaseUrl() + url" target="_blank" class="inline-block bg-emerald-50 text-emerald-600 border border-emerald-100 px-2 py-1 rounded text-[9px] font-bold hover:bg-emerald-100">ไฟล์ {{ Number(i)+1 }}</a>
                                       </div>
                                   </div>
                                   <span v-else class="text-slate-400 text-[10px]">-</span>
@@ -860,12 +860,12 @@ const formatTimeOnly = (ds: string) => new Date(ds).toLocaleTimeString('th-TH', 
                                       <h4 class="font-bold text-amber-700 text-[10px] uppercase tracking-widest flex items-center gap-1"><svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> ประวัติการแก้ไขส่งงาน</h4>
                                       <div v-for="(h, idx) in s.histories" :key="h.id" class="bg-white p-3 rounded-lg border border-amber-100 shadow-sm flex flex-col gap-2">
                                           <div class="flex justify-between items-center border-b border-slate-50 pb-1">
-                                              <span class="text-[9px] font-bold text-slate-500">ครั้งที่ {{ s.histories.length - idx }} (ส่งเมื่อ: {{ formatDate(h.submitted_at) }})</span>
+                                              <span class="text-[9px] font-bold text-slate-500">ครั้งที่ {{ s.histories.length - Number(idx) }} (ส่งเมื่อ: {{ formatDate(h.submitted_at) }})</span>
                                               <span v-if="h.is_late" class="text-[8px] bg-rose-100 text-rose-600 px-1.5 py-0.5 rounded font-bold">เลยกำหนด</span>
                                           </div>
                                           <p v-if="h.student_comment" class="text-[10px] text-slate-600 italic border-l-2 border-slate-200 pl-2">"{{ h.student_comment }}"</p>
                                           <div class="flex gap-1.5 flex-wrap">
-                                              <a v-for="(url, ui) in parseJsonArray(h.file_urls)" :key="ui" :href="getBaseUrl() + url" target="_blank" class="bg-slate-100 text-slate-600 px-2 py-0.5 rounded text-[9px] font-bold hover:bg-slate-200">ไฟล์แนบเก่า {{ ui+1 }}</a>
+                                              <a v-for="(url, ui) in parseJsonArray(h.file_urls)" :key="ui" :href="getBaseUrl() + url" target="_blank" class="bg-slate-100 text-slate-600 px-2 py-0.5 rounded text-[9px] font-bold hover:bg-slate-200">ไฟล์แนบเก่า {{ Number(ui)+1 }}</a>
                                           </div>
                                       </div>
                                   </div>
@@ -924,7 +924,7 @@ const formatTimeOnly = (ds: string) => new Date(ds).toLocaleTimeString('th-TH', 
                    
                    <div v-if="a.file_urls" class="mb-4 relative z-10 flex gap-2 flex-wrap">
                      <a v-for="(url, idx) in parseJsonArray(a.file_urls)" :key="idx" :href="getBaseUrl() + url" target="_blank" download class="inline-flex items-center gap-1 text-[10px] font-semibold bg-slate-100 text-slate-600 px-3 py-1.5 rounded-md hover:bg-slate-200 transition-colors">
-                       <span v-html="icons.document"></span> ไฟล์โจทย์ {{ idx + 1 }}
+                       <span v-html="icons.document"></span> ไฟล์โจทย์ {{ Number(idx) + 1 }}
                      </a>
                    </div>
                    
@@ -1010,7 +1010,7 @@ const formatTimeOnly = (ds: string) => new Date(ds).toLocaleTimeString('th-TH', 
 
                <div class="space-y-4">
                  <div v-for="(q, idx) in activeQuiz.questions" :key="q.id" class="bg-white p-5 md:p-6 rounded-xl border border-slate-200 shadow-sm">
-                    <p class="font-bold text-sm text-slate-800 mb-4 leading-relaxed">{{ idx + 1 }}. {{ q.question_text }}</p>
+                    <p class="font-bold text-sm text-slate-800 mb-4 leading-relaxed">{{ Number(idx) + 1 }}. {{ q.question_text }}</p>
                     
                     <img v-if="q.image_url" :src="getBaseUrl() + q.image_url" class="mb-5 rounded-lg max-h-60 object-contain w-full md:w-auto border border-slate-100 shadow-sm">
                     
@@ -1056,7 +1056,7 @@ const formatTimeOnly = (ds: string) => new Date(ds).toLocaleTimeString('th-TH', 
             <template v-else>
               <div v-if="canManageCourse" class="bg-white/80 backdrop-blur-md p-5 rounded-2xl shadow-sm border border-white">
                 <h3 class="font-bold text-base mb-4 text-slate-800 flex items-center gap-1.5">
-                  <span class="p-1 rounded text-white shadow-sm" style="background-color: var(--theme-color)" v-html="menus[2].icon"></span> 
+                  <span class="p-1 rounded text-white shadow-sm" style="background-color: var(--theme-color)" v-html="menus[2]?.icon"></span> 
                   สร้างแบบทดสอบใหม่
                 </h3>
                 
@@ -1235,7 +1235,7 @@ const formatTimeOnly = (ds: string) => new Date(ds).toLocaleTimeString('th-TH', 
             <div v-if="canManageCourse" class="bg-white/90 backdrop-blur-md rounded-2xl shadow-sm border border-white overflow-hidden">
               <div class="p-5 border-b border-slate-100 flex flex-col md:flex-row justify-between items-start md:items-center gap-3 bg-white">
                 <h2 class="text-xl font-bold text-slate-800 flex items-center gap-2">
-                  <span class="text-white p-2 rounded-lg" style="background-color: var(--theme-color)" v-html="menus[3].icon"></span> ระบบเช็คชื่อ
+                  <span class="text-white p-2 rounded-lg" style="background-color: var(--theme-color)" v-html="menus[3]?.icon"></span> ระบบเช็คชื่อ
                 </h2>
                 <button v-if="!activeAttendance" @click="startAttendance" class="text-white px-4 py-2 text-xs rounded-lg font-bold shadow-sm w-full md:w-auto" style="background-color: var(--theme-color)">สร้างเซสชัน</button>
                 <button v-else @click="stopAttendance" class="bg-rose-500 text-white px-4 py-2 text-xs rounded-lg font-bold shadow-sm w-full md:w-auto">ปิดเซสชัน</button>
@@ -1324,7 +1324,7 @@ const formatTimeOnly = (ds: string) => new Date(ds).toLocaleTimeString('th-TH', 
             <div class="bg-white/90 backdrop-blur-md rounded-2xl shadow-sm border border-white overflow-hidden">
               <div class="p-5 md:p-6 border-b border-slate-100 flex justify-between items-center bg-white">
                 <h2 class="text-xl font-bold text-slate-800 flex items-center gap-2">
-                   <span class="text-white p-1.5 rounded-lg" style="background-color: var(--theme-color)" v-html="menus[4].icon"></span> รายละเอียดวิชา
+                   <span class="text-white p-1.5 rounded-lg" style="background-color: var(--theme-color)" v-html="menus[4]?.icon"></span> รายละเอียดวิชา
                 </h2>
                 <button v-if="canManageCourse" @click="toggleSyllabusEdit" class="text-[10px] font-bold bg-slate-100 text-slate-600 px-3 py-1.5 rounded-md border border-slate-200 hover:bg-slate-200">
                    {{ syllabusEditMode ? 'ยกเลิก' : 'แก้ไข' }}
@@ -1406,7 +1406,7 @@ const formatTimeOnly = (ds: string) => new Date(ds).toLocaleTimeString('th-TH', 
             <div class="bg-white/90 backdrop-blur-md rounded-2xl shadow-sm border border-white flex flex-col h-full overflow-hidden">
               <div class="bg-white p-3 border-b border-slate-100 flex justify-between items-center shrink-0">
                  <div class="flex items-center gap-2">
-                    <div class="text-slate-800 bg-slate-100 p-2 rounded-lg" v-html="menus[6].icon"></div>
+                    <div class="text-slate-800 bg-slate-100 p-2 rounded-lg" v-html="menus[6]?.icon"></div>
                     <div>
                       <h3 class="font-bold text-base text-slate-800 leading-none">ห้องแชท</h3>
                       <p class="text-[8px] font-bold text-emerald-500 uppercase tracking-widest mt-0.5 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_5px_rgba(52,211,153,0.8)] animate-pulse"></span> ออนไลน์</p>
@@ -1432,7 +1432,7 @@ const formatTimeOnly = (ds: string) => new Date(ds).toLocaleTimeString('th-TH', 
                   </div>
                 </div>
                 <div v-if="!chats.length" class="h-full flex flex-col items-center justify-center text-slate-400 font-bold">
-                   <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center mb-3 shadow-sm border border-slate-100 text-slate-400" v-html="menus[6].icon"></div>
+                   <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center mb-3 shadow-sm border border-slate-100 text-slate-400" v-html="menus[6]?.icon"></div>
                    <p class="text-sm">ยังไม่มีข้อความ</p>
                 </div>
               </div>
@@ -1674,7 +1674,7 @@ const formatTimeOnly = (ds: string) => new Date(ds).toLocaleTimeString('th-TH', 
            <div class="p-4 border-b border-slate-100 flex justify-between items-center bg-slate-50 rounded-t-2xl shrink-0">
               <div>
                  <h3 class="font-bold text-slate-800 flex items-center gap-2">
-                   <span v-html="menus[2].icon" class="text-blue-500"></span> ตรวจคำตอบ: {{ activeQuizDashboardObj?.title }}
+                   <span v-html="menus[2]?.icon" class="text-blue-500"></span> ตรวจคำตอบ: {{ activeQuizDashboardObj?.title }}
                  </h3>
                  <p class="text-[10px] text-slate-500 mt-1 font-medium">คะแนนดิบจากระบบ: <span class="text-emerald-600 font-bold">{{ activeQuizSubmission?.score || 0 }} / {{ activeQuizDashboardObj?.questions?.length || 0 }}</span></p>
               </div>
@@ -1692,7 +1692,7 @@ const formatTimeOnly = (ds: string) => new Date(ds).toLocaleTimeString('th-TH', 
                </div>
 
                <div v-for="(q, idx) in activeQuizDashboardObj?.questions" :key="q.id" class="p-4 bg-white border border-slate-200 rounded-xl shadow-sm">
-                  <p class="text-xs font-bold text-slate-700 mb-3 leading-relaxed">{{ idx + 1 }}. {{ q.question_text }}</p>
+                  <p class="text-xs font-bold text-slate-700 mb-3 leading-relaxed">{{ Number(idx) + 1 }}. {{ q.question_text }}</p>
                   <img v-if="q.image_url" :src="getBaseUrl() + q.image_url" class="mb-4 rounded-lg max-h-40 border border-slate-100 shadow-sm object-contain w-full md:w-auto">
 
                   <div class="bg-slate-50 p-3 rounded-lg border border-slate-100 text-[11px] mb-2 relative">
